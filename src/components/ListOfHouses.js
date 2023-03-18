@@ -5,20 +5,24 @@ function ListOfHouses() {
     // { } must be around city bc useParams() returns an object, not a string!
     const {city} = useParams()
     const cityStr = JSON.stringify(city)
+    console.log(city)
     console.log("params: " + cityStr)
 
     const getHouses = () => {
+        console.log('inside getHouses')
+        const url = 'https://www.zillow.com/' + city + '-ga'
         const options = {
             method: 'GET',
             url: 'https://zillow-com1.p.rapidapi.com/searchByUrl',
             params: {
-                url: 'https://www.zillow.com/' + cityStr
+                url: url
             },
             headers: {
-                'X-RapidAPI-Key': '02639e1c5cmsh7ab396edd816371p1d73b7jsn7e8eebed8bfa',
+                'X-RapidAPI-Key': 'API-KEY',
                 'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
             }
         };
+        console.log(url)
 
 
         axios.request(options).then(function (response) {
