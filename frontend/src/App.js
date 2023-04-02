@@ -25,10 +25,11 @@ function App({ signOut }) {
                 <Route path="/" element={<HomePage cityData={saveCityDataHandler} />} />
                 <Route path="/ListOfHouses/:city" element={<ListOfHouses />} />
             </Routes>
-            <Button onClick={signOut}>Sign Out</Button>
+            {/*<Button onClick={signOut}>Sign Out</Button>*/}
         </View>
 
     );
 }
 
 export default withAuthenticator(App);
+// export default App;
