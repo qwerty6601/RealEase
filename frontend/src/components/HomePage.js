@@ -17,25 +17,42 @@ function HomePage(props){
     const goToListOfHouses = () => {
         console.log("inside goToListOfHouses")
         navigate("./ListOfHouses/" + city);
-        // window.location.href = '/ListOfHouses/' + city;
     };
 
-    return (<div className="homepage">
+    const goToChatBot = () => {
+        navigate("./ChatBot/");
+    };
+
+    return (
+        <div>
+            <h2 className="homepage">
                 <div className="header">
                     <img className="logo" src={logo} alt="logo" />
-                    <button className="loginBtn">LOGIN</button>
+
+                    <div className="home-info">
+                        <p className="home-title">Invest smarter, not harder</p>
+                        <p className="home-description">Access a wealth of data and analysis to identify the best investment opportunities for you,
+                            based on your goals and risk tolerance. Build a profitable portfolio with confidence,
+                            no matter your level of experience.</p>
+                    </div>
+                    <p className="search">Search: </p> <input type="text"/>
+                    <button className="enterBtn"
+                             onClick={(event) => {
+                        getSearchResults(event);
+                        goToListOfHouses();
+                    }}>
+                        Enter
+                    </button>
+
+                    <button className="enterBtn"
+                            onClick={(event) => {
+                                goToChatBot();
+                            }}>
+                        Enter
+                    </button>
                 </div>
-                <div className="home-info">
-                    <p className="home-title">Invest smarter, not harder</p>
-                    <p className="home-description">Access a wealth of data and analysis to identify the best investment opportunities for you,
-                        based on your goals and risk tolerance. Build a profitable portfolio with confidence,
-                        no matter your level of experience.</p>
-                </div>
-                {/*<p className="search">Search: </p> <input type="text"/>*/}
-                {/*<button className="enterBtn" onClick={(event) => {*/}
-                {/*    getSearchResults(event);*/}
-                {/*    goToListOfHouses();*/}
-                {/*}}>Enter</button>*/}
+
+            </h2>
     </div>)
 }
 

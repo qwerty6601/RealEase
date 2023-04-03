@@ -11,6 +11,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 import HomePage from './components/HomePage'
 import ListOfHouses from './components/ListOfHouses'
+import ChatBot from './components/ChatBot'
 
 
 function App({ signOut }) {
@@ -24,12 +25,12 @@ function App({ signOut }) {
             <Routes>
                 <Route path="/" element={<HomePage cityData={saveCityDataHandler} />} />
                 <Route path="/ListOfHouses/:city" element={<ListOfHouses />} />
+                <Route path="/chatbot" element={<ChatBot />} />
             </Routes>
-            {/*<Button onClick={signOut}>Sign Out</Button>*/}
+            <Button onClick={signOut}>Sign Out</Button>
         </View>
 
     );
 }
 
 export default withAuthenticator(App);
-// export default App;

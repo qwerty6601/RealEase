@@ -1,19 +1,16 @@
 {
-  "name": "frontend",
+  "name": "realease",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@aws-amplify/ui-react": "^4.4.0",
+    "@aws-amplify/ui-react": "^4.3.10",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "aws-amplify": "^5.0.20",
-    "bootstrap": "^5.2.3",
+    "aws-amplify": "^5.0.18",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-grid-gallery": "^1.0.0",
-    "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -40,5 +37,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.37.0",
+    "jquery": "^3.6.4",
+    "react-router-dom": "^6.9.0"
   }
 }
