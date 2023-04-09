@@ -3,7 +3,7 @@ import apigClientFactory from '../sdk/apigClient.js'
 
 
 function ChatBot() {
-  // var sdk = apigClientFactory.newClient({});
+  var sdk = apigClientFactory.newClient({});
 
   $(document).ready(function () {
     var $messages = $('.messages-content'),

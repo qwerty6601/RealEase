@@ -29,7 +29,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/, 
+                test: /\.(jpe?g|jpg|png|gif|svg)$/, 
                 type: 'asset/resource'
             }
         ]
@@ -47,6 +47,8 @@ module.exports = {
         new CopyPlugin({
             patterns: [
               { from: "img", to: "img" },
+              { from: "src", to: "src" },
+              { from: "css", to: "css" },
             ],
         }),
     ]
