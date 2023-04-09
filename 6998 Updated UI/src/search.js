@@ -33,7 +33,8 @@ $(document).ready(function() {
             "status": true, 
             "rating": 5.3,
             "estimate": "$520,000"
-        },
+        }
+        ,
         {
             "id": 4,
             "image": "./img/house-4.png",
@@ -52,7 +53,7 @@ $(document).ready(function() {
             "unit": 2,
             "area": "1,532",
             "address": "634 Ander Street, NYC, NY 10172",
-            "status": false, 
+            "status": true, 
             "rating": 6.5,
             "estimate": "$520,000"
         },
@@ -63,7 +64,7 @@ $(document).ready(function() {
             "unit": 5,
             "area": "3,008",
             "address": "4312 Jinsa Street, NYC, NY 10231",
-            "status": true, 
+            "status": false, 
             "rating": 1.3,
             "estimate": "$720,000"
         }
@@ -87,15 +88,17 @@ function show_house_results(search_results, search_text) {
                 favorite_status_src = "./img/dislike.png"
             }
 
+
             $("#search-houses").append('<div class="col-4 house"> \
-                                        <a href="/house/' + value.id + '" class="search-links"> \
-                                        <img class="house-img" src="' + value.image + '" class="search-imgs"></a><br> \
+                                        <a href="/house.html#' + value.id + '"> \
+                                        <img class="house-imgs" src="' + value.image + '"></a> \
                                         <span class="house-price">' + value.price + '</span> \
                                         <span class="house-prop">' + value.unit + ' unit(s) | ' + value.area + ' sq ft</span> \
                                         <span class="house-address">' + value.address + '</span> \
                                         <input class="house-fav" type="image" id="fav-' + value.id + '"src="' + favorite_status_src + '"/> \
                                         <div class="house-rating" id="rating-' + value.id + '">' + value.rating + '</div> \
                                         <div class="house-estimate">Estimate: <b>' + value.estimate + '</b></span></div>')
+
             $("#rating-" + value.id).css("background-color", get_rating_color(value.rating));
 
             // change favorite status

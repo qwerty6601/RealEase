@@ -1,5 +1,6 @@
 body {
     background-image: url('../img/white-background.jpg');
+    overflow-x: hidden;
 }
 
 .menu-item {
@@ -19,16 +20,17 @@ body {
     width: 15%;
 }
 
-#search-container {
-    margin: 5% 3% 0% 3%;
-}
-
 .search-col {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+#search-menu {
+    margin-top: 3%;
+    margin-left: 1%;
+}
+
 #search-container {
-    margin: 3% 2% 0% 2%;
+    text-align: center;
 }
 
 #search-title {
@@ -37,16 +39,8 @@ body {
     color: black;
 }
 
-#search-houses {
-    font-family: 'Jost', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #sort {
-    text-align: right;
-    padding-right: 1%;
+    text-align: center;
 }
 
 #sort-btn {
@@ -61,16 +55,11 @@ body {
 .house {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: inline-block;
+    width: 450px;
     height: 400px;
-    padding-right: 0%;
-    padding-left: 0%;
-    overflow: hidden;
-    margin-left: 0.5%;
-    margin-right: 0.5%;
-}
-
-.house-img {
-    width: 100%;
+    padding: 0%;
+    text-align: center;
+    margin: 0% 0.5% 1% 0.5%;
 }
 
 .house-price {
@@ -80,6 +69,11 @@ body {
     font-family: Jost;
     font-weight: Bold;
     font-size: 30px;
+}
+
+.house-imgs {
+    width: 100%;
+    height: 250px;
 }
 
 .house-prop {
@@ -126,28 +120,4 @@ body {
     right: 8px;
     font-family: Jost;
     font-size: 17px;
-}
-
-.search-links {
-    color: gray;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    display: inline-block;
-    width: 100%; 
-}
-
-.search-links:hover {
-    color: black;
-}
-
-.search-imgs {
-    width: 90%;
-    height: auto;
-}
-
-.search-prices {
-    font-weight: bold;
-    font-size: 19px;
 }
