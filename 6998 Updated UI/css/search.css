@@ -26,3 +26,130 @@ body {
 .search-col {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+#search-container {
+    margin: 3% 2% 0% 2%;
+}
+
+#search-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: black;
+}
+
+#search-houses {
+    font-family: 'Jost', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sort {
+    text-align: right;
+    padding-right: 1%;
+}
+
+#sort-btn {
+    border: 0px;
+    background-color: transparent;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.house {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: inline-block;
+    height: 400px;
+    padding-right: 0%;
+    padding-left: 0%;
+    overflow: hidden;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
+.house-img {
+    width: 100%;
+}
+
+.house-price {
+    position: absolute;
+    top: 261px;
+    left: 22px;
+    font-family: Jost;
+    font-weight: Bold;
+    font-size: 30px;
+}
+
+.house-prop {
+    position: absolute;
+    top: 312px;
+    left: 22px;
+    font-family: Jost;
+    font-size: 20px;
+}
+
+.house-address {
+    position: absolute;
+    top: 352px;
+    left: 22px;
+    font-family: Jost;
+    font-size: 20px;
+}
+
+.house-fav {
+    width: 76px;
+    height: 69px;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+}
+
+.house-rating {
+    border-radius: 5px;
+    background: green;
+    width: 47px;
+    height: 25px;
+    position: absolute;
+    top: 290px;
+    right: 8px;
+    color: white;
+    text-align: center;
+    font-family: Jost;
+    font-weight: Bold;
+    font-size: 17px;
+}
+
+.house-estimate {
+    background: url("../images/house-estimate.png");
+    position: absolute;
+    top: 262px;
+    right: 8px;
+    font-family: Jost;
+    font-size: 17px;
+}
+
+.search-links {
+    color: gray;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    display: inline-block;
+    width: 100%; 
+}
+
+.search-links:hover {
+    color: black;
+}
+
+.search-imgs {
+    width: 90%;
+    height: auto;
+}
+
+.search-prices {
+    font-weight: bold;
+    font-size: 19px;
+}
