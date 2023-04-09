@@ -44,8 +44,7 @@ export const confirmSignUp = async ({username, code}) => {
     try {
       const {result} = await Auth.confirmSignUp(username, code);
       console.log(result);
-      window.location = '/home.html'
-
+      window.location = '/index.html'
     } catch (error) {
         console.log('error confirming sign up', error);
         alert(error.message);

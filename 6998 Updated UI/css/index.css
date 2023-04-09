@@ -65,7 +65,7 @@ body {
 }
 
 #overlay,
-#overlay-confirm {
+.overlay-other {
     position: fixed;
     display: none;
     width: 100%;
@@ -78,10 +78,16 @@ body {
     z-index: 2;
 }
 
+.overlay-other {
+    display: block;
+}
+
 /* Authentication */
 #login-container,
 #signup-container,
-#signup-confirm-container {
+#signup-confirm-container,
+#forgot-container,
+#forgot-confirm-container {
     position: absolute;
     top: 50%;
     left: 50%;

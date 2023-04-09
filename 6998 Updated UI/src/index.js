@@ -34,6 +34,10 @@ $('#go-to-signup').click(function() {
     $('.error-msg').hide()
 });
 
+$('#go-to-reset-password').click(function() {
+    window.location = './forgot.html';
+});
+
 $("#loginBtn").click(function() {
     document.getElementById("overlay").style.display = "block";
 });
