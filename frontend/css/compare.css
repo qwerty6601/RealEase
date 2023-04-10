@@ -2,6 +2,12 @@ body {
     background-image: url('../img/white-background.jpg');
 }
 
+#logo-after {
+    margin: 0%;
+    width: 15%;
+    cursor: pointer;
+}
+
 .menu-item {
     margin-right: 60%;
     font-size: 23px;

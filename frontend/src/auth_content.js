@@ -16,6 +16,11 @@ export function checkAuthContent() {
         userAuthState()
             .then(data => {
                 console.log('user is authenticated: ', data);
+
+                // if user already authenticated, redirect to home page (after login)
+                if (window.location.pathname == "/" || window.location.pathname == "/index.html") {
+                    window.location = '/home.html';
+                }
             })
             .catch(error => {
                 console.log('user is not authenticated: ', error);

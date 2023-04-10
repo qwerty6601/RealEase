@@ -15,6 +15,10 @@ $('#fav-3').click(function() {
     }
 });
 
+$('#logo-after').click(function() {
+    window.location = './home.html';
+});
+
 function change_house_img(img) {
     let detail_img = document.getElementById("house-detail-img");
     detail_img.src = img.src;
