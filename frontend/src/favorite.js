@@ -96,9 +96,9 @@ function show_favorite_houses(favorite_houses) {
                 $('#add-' + value.id).attr("src", "./img/add.png");
 
                 // remove house from compare list
-                const index = array.indexOf(value.id);
+                const index = compare_houses.indexOf(value.id);
                 if (index > -1) {
-                    array.splice(index, 1);
+                    compare_houses.splice(index, 1);
                 }
 
                 compare_count--
