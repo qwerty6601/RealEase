@@ -1,7 +1,6 @@
 import { Auth } from 'aws-amplify';
 import '../css/index.css';
 
-// Forgot password function
 export const forgotPass = async ({username}) => {    
     try {
         const { user } = await Auth.forgotPassword(username);
@@ -13,7 +12,7 @@ export const forgotPass = async ({username}) => {
     }
 }
 
-// Event Listeners if user is on Forgot Password page
+// forgot password - user can create new password
 if (document.querySelector("#auth-forgot-password")) {
 
     document.querySelector("#form-auth-forgot-password").addEventListener("click", event => {

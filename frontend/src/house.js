@@ -2,6 +2,7 @@ var temp = ""
 
 $(document).ready(function() {
     temp = document.getElementById("house-detail-img").src;
+    console.log(location.hash.substring(1))
 })
 
 // change favorite status

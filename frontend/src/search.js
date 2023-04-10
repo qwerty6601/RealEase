@@ -1,5 +1,6 @@
 $(document).ready(function() {
     let search_text = location.hash.substring(1); 
+    // TODO: get search results from backend
     search_results = [
         {
             "id": 1,
@@ -10,7 +11,7 @@ $(document).ready(function() {
             "address": "347 East 4th Street, NYC, NY 10009",
             "status": true, 
             "rating": 8.4,
-            "estimate": "$250,500"
+            "estimate": "250500"
         },
         {
             "id": 2,
@@ -21,7 +22,7 @@ $(document).ready(function() {
             "address": "627 East 6th Street, NYC, NY 10009",
             "status": false, 
             "rating": 3.1,
-            "estimate": "$460,000"
+            "estimate": "460000"
         },
         {
             "id": 3,
@@ -32,7 +33,7 @@ $(document).ready(function() {
             "address": "512 East 11th Street, 5D, NYC, NY 10075",
             "status": true, 
             "rating": 5.3,
-            "estimate": "$520,000"
+            "estimate": "520000"
         },
         {
             "id": 4,
@@ -43,7 +44,7 @@ $(document).ready(function() {
             "address": "2412 Hans Street, NYC, NY 10071",
             "status": true, 
             "rating": 5.3,
-            "estimate": "$520,000"
+            "estimate": "520000"
         },
         {
             "id": 5,
@@ -54,7 +55,7 @@ $(document).ready(function() {
             "address": "634 Ander Street, NYC, NY 10172",
             "status": true, 
             "rating": 6.5,
-            "estimate": "$520,000"
+            "estimate": "520000"
         },
         {
             "id": 6,
@@ -65,11 +66,15 @@ $(document).ready(function() {
             "address": "4312 Jinsa Street, NYC, NY 10231",
             "status": false, 
             "rating": 1.3,
-            "estimate": "$720,000"
+            "estimate": "720000"
         }
     ]
     show_house_results(search_results, search_text)
 })
+
+$('#logo-after').click(function() {
+    window.location = './home.html';
+});
 
 // show houses based on search query
 function show_house_results(search_results, search_text) {
@@ -87,7 +92,6 @@ function show_house_results(search_results, search_text) {
                 favorite_status_src = "./img/dislike.png"
             }
 
-
             $("#search-houses").append('<div class="col-4 house"> \
                                         <a href="/house.html#' + value.id + '"> \
                                         <img class="house-imgs" src="' + value.image + '"></a> \
@@ -96,7 +100,7 @@ function show_house_results(search_results, search_text) {
                                         <span class="house-address">' + value.address + '</span> \
                                         <input class="house-fav" type="image" id="fav-' + value.id + '"src="' + favorite_status_src + '"/> \
                                         <div class="house-rating" id="rating-' + value.id + '">' + value.rating + '</div> \
-                                        <div class="house-estimate">Estimate: <b>' + value.estimate + '</b></span></div>')
+                                        <div class="house-estimate">Estimate: <b>$' + value.estimate + '</b></span></div>')
 
             $("#rating-" + value.id).css("background-color", get_rating_color(value.rating));
 

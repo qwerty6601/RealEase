@@ -42,6 +42,10 @@ $(document).ready(function() {
     show_favorite_houses(favorite_houses)
 })
 
+$('#logo-after').click(function() {
+    window.location = './home.html';
+});
+
 // show houses based on search query
 function show_favorite_houses(favorite_houses) {
     $.each(favorite_houses, function(index, value) {

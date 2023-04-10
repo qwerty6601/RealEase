@@ -1,6 +1,5 @@
 import { Auth } from 'aws-amplify';
 
-// Sign Out function
 export async function signOut() {
     console.log("signOut triggered...")
     try {
@@ -11,10 +10,9 @@ export async function signOut() {
     }
 }
 
-
-// Event Listener for Sign Out button
-if (document.querySelector("#nav-logout")) {
-    document.querySelector("#nav-logout").addEventListener("click", () => {
+// log out of website
+if (document.querySelector("#logout-btn")) {
+    document.querySelector("#logout-btn").addEventListener("click", () => {
         signOut();
     })
 }

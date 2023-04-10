@@ -1,6 +1,5 @@
 import { Auth } from 'aws-amplify';
 
-// sign In function
 export const signIn = async ({username, password}) => {
     try {
         const { user } = await Auth.signIn(username, password);
@@ -11,15 +10,15 @@ export const signIn = async ({username, password}) => {
     }
 }
 
-// event listeners if user is on Login page
+// login into the application
 if (document.querySelector("#auth-login")) {
     document.querySelector("#form-auth-login").addEventListener("click", event => {
         event.preventDefault();
     });
 
-    document.querySelector("#btnLogin").addEventListener("click", () => {
-        const username = document.querySelector("#formLoginEmail").value
-        const password = document.querySelector("#formLoginPassword").value
+    document.querySelector("#login-btn").addEventListener("click", () => {
+        const username = document.querySelector("#login-email").value
+        const password = document.querySelector("#login-password").value
         console.log({username, password});
         signIn({username, password});
     });
