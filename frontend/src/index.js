@@ -1,24 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Amplify } from 'aws-amplify';
-import config from './aws-exports';
-import {BrowserRouter} from "react-router-dom";
+console.log("index.js started...");
 
-Amplify.configure(config);
+import { Amplify } from 'aws-amplify'
+import { Auth } from 'aws-amplify';
+import aws_exports from "./aws-exports.js";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-  </React.StrictMode>
-);
+import { userAuthState } from './auth_user';
+import { checkAuthContent } from './auth_content';
+import { signUp, confirmSignUp, resendConfirmationCode } from './auth_signup';
+import { signIn } from './auth_login';
+import { forgotPass, confirmForgotPass } from './auth_forgot_password';
+import { signOut } from './auth_logout';
+import '../css/index.css';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+Amplify.configure(aws_exports);
+
+checkAuthContent();
+
+$('.error-msg').hide()
+$('.good-msg').hide()
+$('#auth-signup').hide()
+
+// show login container
+$('#go-to-login').click(function() {
+    $('#auth-login').show()
+    $('#auth-signup').hide()
+    $('.error-msg').hide()
+});
+
+// show sign up container
+$('#go-to-signup').click(function() {
+    $('#auth-signup').show()
+    $('#auth-login').hide()
+    $('.error-msg').hide()
+});
+
+$('#go-to-reset-password').click(function() {
+    window.location = './forgot.html';
+});
+
+$("#loginBtn").click(function() {
+    document.getElementById("overlay").style.display = "block";
+});
