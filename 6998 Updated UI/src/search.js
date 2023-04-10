@@ -33,8 +33,7 @@ $(document).ready(function() {
             "status": true, 
             "rating": 5.3,
             "estimate": "$520,000"
-        }
-        ,
+        },
         {
             "id": 4,
             "image": "./img/house-4.png",

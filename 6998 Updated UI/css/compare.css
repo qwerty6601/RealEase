@@ -1,0 +1,55 @@
+body {
+    background-image: url('../img/white-background.jpg');
+}
+
+.menu-item {
+    margin-right: 60%;
+    font-size: 23px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: black;
+}
+
+.menu-item:hover {
+    color: black;
+}
+
+#logo-after {
+    margin: 0%;
+    width: 15%;
+}
+
+#compare-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: black;
+    margin-top: 3%;
+    margin-left: 1.5%;
+}
+
+#compare-table {
+    font-family: 'Jost', sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    table-layout : fixed;
+    margin: 0px auto;
+}
+ 
+.compare-img {
+    width: 60%;
+    height: auto;
+}
+
+#compare-table td, #compare-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+#compare-table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+#compare-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}

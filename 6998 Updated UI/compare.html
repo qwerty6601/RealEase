@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,"> 
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 
+  </head>
+
+  <body>
+    <div id="header">
+      <img id="logo-after" src="/img/logo-background.png" alt="logo" />
+      <a class="menu-item" href="./favorite.html">Favorites</a>
+      <button id="nav-logout">LOGOUT</button>
+    </div>
+    
+    <h2 id="compare-title">Compare</h2>
+
+    <table id="compare-table">
+        <tr>
+            <th></th>
+            <td><img class="compare-img" src="./img/house-1.png"></td>
+            <td><img class="compare-img" src="./img/house-2.png"></td>
+        </tr>
+        <tr>
+            <th>List Price</th>
+            <td>$275,000</td>
+            <td>$275,000</td>
+        </tr>
+        <tr>
+            <th>Estimate</th>
+            <td>$250,500</td>
+            <td>$300,000</td>
+        </tr>
+        <tr>
+            <th>Land Size</th>
+            <td>1,164</td>
+            <td>2,112</td>
+        </tr>
+        <tr>
+            <th>Year Built</th>
+            <td>1900</td>
+            <td>1950</td>
+        </tr>
+        <tr>
+            <th>Price/sq ft</th>
+            <td>$236.25</td>
+            <td>$130.21</td>
+        </tr>
+        <tr>
+            <th>Total Units</th>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+    </table>
+
+    <section id="authenticated-content">
+        <div class="d-flex justify-content-center">
+          <div class="align-self-center"></div>
+        </div>
+    </section>
+    <link rel="stylesheet" type="text/css" href="./css/compare.css" />
+    <script src="./src/compare.js"></script>
+    <script src="main.bundle.js"></script>
+</body>
+
+</html>
