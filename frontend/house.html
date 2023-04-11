@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,"> 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 
+  </head>
+
+  <body>
+    <div id="header">
+      <img id="logo-after" src="/img/logo-background.png" alt="logo" />
+      <a class="menu-item" href="./favorite.html">Favorites</a>
+      <button id="logout-btn">LOGOUT</button>
+    </div>
+
+    <div id="house-detail-container" class="container-fluid">
+        <div class="row">
+            <!-- house image gallery -->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="container">
+                        <img id="house-detail-img" src="./img/house-3.png">
+                    </div>
+
+                    <div class="subimg-col">
+                      <img class="house-detail-subimg" src="./img/house-3-1.png" onclick="change_house_img(this);">
+                    </div>
+                    <div class="subimg-col">
+                      <img class="house-detail-subimg" src="./img/house-3-2.png" onclick="change_house_img(this);">
+                    </div>
+                    <div class="subimg-col">
+                      <img class="house-detail-subimg" src="./img/house-3-3.png" onclick="change_house_img(this);">
+                    </div>
+                    <div class="subimg-col">
+                      <img class="house-detail-subimg" src="./img/house-3-4.png" onclick="change_house_img(this);">
+                    </div>
+                  </div>
+            </div>
+            <!-- house information overview -->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2><b>$489,900</b></h2>
+                    </div>
+                    <div class="col-md-3 text-left">
+                        <input class="house-fav" id="fav-3" type="image" src="./img/like.png"/>
+                    </div>
+                </div>
+                <div id="house-upper-info">
+                    <p>4 units</p>
+                    <p>512 East 11th Street, 5D, NYC, NY 10075</p>
+                </div><br>
+                <div id="house-overview">Overview</div><br><br>
+                <p>Endless potential and tremendous value can be found in this charming and spacious five-room maisonette with all of the services of a white-glove doorman cooperative in the heart of Carnegie Hill.
+                    The space was previously a medical office within a residential apartment but can easily be converted into a beautiful two-bedroom, two-bath townhouse-style residence.
+                    It may also be used as "live/ work or professional space for medical-related professions.</p>
+                <table style="width:100%">
+                    <tr>
+                        <th>Year Built</th>
+                        <td>1900</td>
+                    </tr>
+                    <tr>
+                        <th>Borough</th>
+                        <td>Manhattan</td>
+                    </tr>
+                    <tr>
+                        <th>Neighborhood</th>
+                        <td>Alphabet City</td>
+                    </tr>
+                    <tr>
+                        <th>Building Class</th>
+                        <td>One Family Dwellings</td>
+                    </tr>
+                    <tr>
+                        <th>Lot</th>
+                        <td>46/td>
+                    </tr>
+                    <tr>
+                        <th>Land Square Feet</th>
+                        <td>2,116 sq ft</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <section id="authenticated-content">
+        <div class="d-flex justify-content-center">
+          <div class="align-self-center"></div>
+        </div>
+    </section>
+    <link rel="stylesheet" type="text/css" href="./css/house.css" />
+    <script src="./src/house.js"></script>
+    <script src="main.bundle.js"></script>
+</body>
+
+</html>

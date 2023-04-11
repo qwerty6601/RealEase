@@ -16,3 +16,8 @@ Wei-Jian Guo wg2384
 1. Navigate to `frontend`
 2. In the terminal, type `npm install` to install all the dependencies
 3. Run `npm start`
+
+
+# Update s3 bucket
+1. Run `npm run build`
+2. Upload all files inside /dist folder to the s3 bucket

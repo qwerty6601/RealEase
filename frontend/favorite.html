@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,"> 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 
+  </head>
+
+  <body>
+    <div id="header">
+      <img id="logo-after" src="/img/logo-background.png" alt="logo" />
+      <a class="menu-item" href="./favorite.html">Favorites</a>
+      <button id="logout-btn">LOGOUT</button>
+    </div>
+    
+    <div id="search-menu" class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 id="search-title">Favorites</h2>
+          </div>
+          <div id="compare" class="col-md-4">
+            You can compare two properties at a time
+            <button id="compare-btn">Compare</button>
+          </div>
+        </div>
+    </div>
+
+    <div id="search-container" class="container-fluid">
+      <div id="fav-houses"></div>
+    </div>
+
+    <section id="authenticated-content">
+        <div class="d-flex justify-content-center">
+          <div class="align-self-center"></div>
+        </div>
+    </section>
+    <link rel="stylesheet" type="text/css" href="./css/search.css" />
+    <script src="./src/favorite.js"></script>
+    <script src="main.bundle.js"></script>
+</body>
+
+</html>

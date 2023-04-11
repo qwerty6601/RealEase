@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,"> 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 
+  </head>
+
+<body>
+    <div id="header">
+        <img id="logo" src="/img/logo.png" alt="logo" />
+        <button id="loginBtn">LOGIN</button>
+    </div>
+    <div id="home-info">
+        <p id="home-title">Invest smarter, not harder</p>
+        <p id="home-description">Access a wealth of data and analysis to identify the best investment opportunities for you,
+            based on your goals and risk tolerance. Build a profitable portfolio with confidence,
+            no matter your level of experience.</p>
+    </div>
+    <div class="overlay-other">
+        <!-- forgot password -->
+        <section id="auth-forgot-password">
+            <div id="forgot-container" class="d-flex justify-content-center">
+                <div class="align-self-center">
+                    <img id="authenticate-logo" src="/img/logo-dark.png" alt="logo" />
+                    <form id="form-auth-forgot-password">
+                        <div class="mb-3">
+                            <label for="formForgotEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="formForgotEmail" aria-describedby="emailHelp">                        
+                        </div>                            
+                        <button id="btnForgot" type="submit" class="authenticate-btn btn btn-primary">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="main.bundle.js"></script>
+</body>
+</html>

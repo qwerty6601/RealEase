@@ -1,0 +1,154 @@
+body {
+    background-image: url('../img/white-background.jpg');
+    overflow-x: hidden;
+}
+
+.menu-item {
+    margin-right: 60%;
+    font-size: 23px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: black;
+}
+
+.menu-item:hover {
+    color: black;
+}
+
+#logo-after {
+    margin: 0%;
+    width: 15%;
+    cursor: pointer;
+}
+
+.search-col {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#search-menu {
+    margin-top: 3%;
+    margin-left: 1%;
+}
+
+#search-container {
+    text-align: center;
+}
+
+#search-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: black;
+}
+
+#sort {
+    text-align: center;
+}
+
+#sort-btn {
+    border: 0px;
+    background-color: transparent;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.house {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: inline-block;
+    width: 450px;
+    height: 400px;
+    padding: 0%;
+    text-align: center;
+    margin: 0% 0.5% 1% 0.5%;
+}
+
+.house-price {
+    position: absolute;
+    top: 261px;
+    left: 22px;
+    font-family: Jost;
+    font-weight: Bold;
+    font-size: 30px;
+}
+
+.house-imgs {
+    width: 100%;
+    height: 260px;
+}
+
+.house-prop {
+    position: absolute;
+    top: 312px;
+    left: 22px;
+    font-family: Jost;
+    font-size: 20px;
+}
+
+.house-address {
+    position: absolute;
+    top: 352px;
+    left: 22px;
+    font-family: Jost;
+    font-size: 20px;
+}
+
+.house-fav {
+    width: 76px;
+    height: 69px;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+}
+
+.house-add {
+    width: 70px;
+    height: 69px;
+    position: absolute;
+    top: 70px;
+    right: 8px;
+}
+
+.house-rating {
+    border-radius: 5px;
+    width: 47px;
+    height: 25px;
+    position: absolute;
+    top: 290px;
+    right: 8px;
+    color: white;
+    text-align: center;
+    font-family: Jost;
+    font-weight: Bold;
+    font-size: 17px;
+}
+
+.house-estimate {
+    position: absolute;
+    top: 262px;
+    right: 8px;
+    font-family: Jost;
+    font-size: 17px;
+}
+
+#compare-btn {
+    margin: 0% 0% 0% 1.5%;
+    border-radius: 25px;
+    background-color: black;
+    padding: 0.8% 1.8% 0.8% 1.8%;
+    border: 0px;
+    font-size: 20px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}
+
+#compare-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+#compare {
+    color: #707070; 
+}
