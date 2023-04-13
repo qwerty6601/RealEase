@@ -19,7 +19,7 @@ max_pages = 20
 total_pages = 1
 
 # Create an empty DataFrame to store all property data
-all_properties = pd.DataFrame()
+all_properties = []
 
 while page <= max_pages and page <= total_pages:
     querystring["page"] = page
@@ -30,8 +30,8 @@ while page <= max_pages and page <= total_pages:
         total_pages = data.get("totalPages", 1)
         property_data = data.get("props", [])
         
-        df = pd.DataFrame(property_data)
-        all_properties = all_properties.append(df, ignore_index=True)
+        zpids = [property.get("zpid") for property in property_data]
+        all_properties.extend(zpids)
 
         page += 1
     
@@ -40,5 +40,6 @@ while page <= max_pages and page <= total_pages:
         print(response.text)
         break
 
-all_properties.to_csv("Data/ames_iowa_listings.csv", index=False)
-print("Data saved to 'Data/ames_iowa_listings.csv'")
+df = pd.DataFrame(all_properties, columns=["zpid"])
+df.to_csv("Data/ames_iowa_zpids.csv", index=False)
+print("Data saved to 'Data/ames_iowa_zpids.csv'")
