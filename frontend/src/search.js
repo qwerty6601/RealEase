@@ -45,6 +45,9 @@ async function fetchSearchResults(location, sortField) {
         unit: 1,
         area: Number(item.GrLivArea),
         address: item["address.streetAddress"],
+        city: item["city"],
+        state: item["state"],
+        zip: item["address.zipcode"],
         status: false,
         rating: 3.0,
         estimate: 123,
@@ -80,7 +83,7 @@ function show_house_results(search_results, search_text) {
                                             <img class="house-imgs" src="' + value.image + '"></a> \
                                             <span class="house-price">$' + value.price.toLocaleString("en-US") + '</span> \
                                             <span class="house-prop">' + value.unit + ' unit(s) | ' + value.area.toLocaleString("en-US") + ' sq ft</span> \
-                                            <span class="house-address">' + value.address + '</span> \
+                                            <span class="house-address">' + value.address + ", " + value.city + ", " + value.state + " " + value.zip + '</span> \
                                             <input class="house-fav" type="image" id="fav-' + value.id + '"src="' + favorite_status_src + '"/> \
                                             <div class="house-rating" id="rating-' + value.id + '">' + value.rating + '</div> \
                                             <div class="house-estimate">Estimate: <b>$' + value.estimate.toLocaleString("en-US") + '</b></span></div>')
