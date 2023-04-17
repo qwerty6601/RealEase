@@ -27,7 +27,7 @@ def search_opensearch_index(user_input, sort_field):
             "query": {
                 "bool": {
                     "should": [
-                        {"match": {"zip_code": user_input}},
+                        {"match": {"zipcode": user_input}},
                     ]
                 }
             },
