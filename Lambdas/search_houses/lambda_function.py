@@ -3,6 +3,7 @@ import boto3
 import json
 import requests
 from requests_aws4auth import AWS4Auth
+import urllib.parse
 
 region = 'us-east-1' # For example, us-west-1
 service = 'es'
@@ -45,7 +46,7 @@ def search_opensearch_index(user_input, sort_field):
             },
         }
     else:
-        print("Invalid input format. Please enter either a zip code or a city and state combination.")
+        print(f"Invalid input format: ${user_input}. Please enter either a zip code or a city and state combination.")
         return []
 
     query["sort"] = [
@@ -56,6 +57,7 @@ def search_opensearch_index(user_input, sort_field):
         }
     ]
     query["_source"] = ["zpid"]
+    query["size"] = 20
 
     response = requests.post(url, auth=awsauth, headers=headers, data=json.dumps(query))
     response.raise_for_status()
@@ -66,8 +68,16 @@ def search_opensearch_index(user_input, sort_field):
     return ids
 
 def lambda_handler(event, context):
-    user_input = event['user_input']
-    sort_field = event['sort_field']
+    query_params = event.get('queryStringParameters', {})
+
+    user_input = query_params.get('user_input')
+    sort_field = query_params.get('sort_field')
+
+    if user_input:
+        user_input = urllib.parse.unquote(user_input)
+        
+    if sort_field:
+        sort_field = urllib.parse.unquote(sort_field)
 
     matching_ids = search_opensearch_index(user_input, sort_field)
     print("Matching IDs:", matching_ids)
@@ -79,4 +89,13 @@ def lambda_handler(event, context):
         if 'Item' in item:
             items.append(item['Item'])
 
-    return items
+    response = {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        "body": json.dumps(items)
+    }
+
+    return response
