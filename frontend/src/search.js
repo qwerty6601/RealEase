@@ -1,80 +1,129 @@
+// import { AWS } from 'aws-sdk';
+
 $(document).ready(function() {
     let search_text = location.hash.substring(1); 
+
+    fetchSearchResults(search_text, "ListingPrice")
+        .then((search_results) => {
+            console.log('Formatted Search Results:', search_results);
+            show_house_results(search_results, search_text)
+        })
+        .catch((error) => {
+            console.error('Error fetching search results:', error);
+        });
+
     // TODO: get search results from backend
-    search_results = [
-        {
-            "id": 1,
-            "image": "./img/house-1.png",
-            "price": 275000,
-            "unit": 1,
-            "area": 1164,
-            "address": "347 East 4th Street, NYC, NY 10009",
-            "status": true, 
-            "rating": 8.4,
-            "estimate": 250500
-        },
-        {
-            "id": 2,
-            "image": "./img/house-2.png",
-            "price": 459900,
-            "unit": 3,
-            "area": 2101,
-            "address": "627 East 6th Street, NYC, NY 10009",
-            "status": false, 
-            "rating": 3.1,
-            "estimate": 460000
-        },
-        {
-            "id": 3,
-            "image": "./img/house-3.png",
-            "price": 489900,
-            "unit": 4,
-            "area": "2005",
-            "address": "512 East 11th Street, 5D, NYC, NY 10075",
-            "status": true, 
-            "rating": 5.3,
-            "estimate": 520000
-        },
-        {
-            "id": 4,
-            "image": "./img/house-4.png",
-            "price": 421000,
-            "unit": 3,
-            "area": 1235,
-            "address": "2412 Hans Street, NYC, NY 10071",
-            "status": true, 
-            "rating": 5.3,
-            "estimate": 520000
-        },
-        {
-            "id": 5,
-            "image": "./img/house-5.png",
-            "price": 301020,
-            "unit": 2,
-            "area": 1532,
-            "address": "634 Ander Street, NYC, NY 10172",
-            "status": true, 
-            "rating": 6.5,
-            "estimate": 520000
-        },
-        {
-            "id": 6,
-            "image": "./img/house-6.png",
-            "price": 889900,
-            "unit": 5,
-            "area": 3008,
-            "address": "4312 Jinsa Street, NYC, NY 10231",
-            "status": false, 
-            "rating": 1.3,
-            "estimate": 720000
-        }
-    ]
-    show_house_results(search_results, search_text)
+    // search_results = [
+    //     {
+    //         "id": 1,
+    //         "image": "./img/house-1.png",
+    //         "price": 275000,
+    //         "unit": 1,
+    //         "area": 1164,
+    //         "address": "347 East 4th Street, NYC, NY 10009",
+    //         "status": true, 
+    //         "rating": 8.4,
+    //         "estimate": 250500
+    //     },
+    //     {
+    //         "id": 2,
+    //         "image": "./img/house-2.png",
+    //         "price": 459900,
+    //         "unit": 3,
+    //         "area": 2101,
+    //         "address": "627 East 6th Street, NYC, NY 10009",
+    //         "status": false, 
+    //         "rating": 3.1,
+    //         "estimate": 460000
+    //     },
+    //     {
+    //         "id": 3,
+    //         "image": "./img/house-3.png",
+    //         "price": 489900,
+    //         "unit": 4,
+    //         "area": "2005",
+    //         "address": "512 East 11th Street, 5D, NYC, NY 10075",
+    //         "status": true, 
+    //         "rating": 5.3,
+    //         "estimate": 520000
+    //     },
+    //     {
+    //         "id": 4,
+    //         "image": "./img/house-4.png",
+    //         "price": 421000,
+    //         "unit": 3,
+    //         "area": 1235,
+    //         "address": "2412 Hans Street, NYC, NY 10071",
+    //         "status": true, 
+    //         "rating": 5.3,
+    //         "estimate": 520000
+    //     },
+    //     {
+    //         "id": 5,
+    //         "image": "./img/house-5.png",
+    //         "price": 301020,
+    //         "unit": 2,
+    //         "area": 1532,
+    //         "address": "634 Ander Street, NYC, NY 10172",
+    //         "status": true, 
+    //         "rating": 6.5,
+    //         "estimate": 520000
+    //     },
+    //     {
+    //         "id": 6,
+    //         "image": "./img/house-6.png",
+    //         "price": 889900,
+    //         "unit": 5,
+    //         "area": 3008,
+    //         "address": "4312 Jinsa Street, NYC, NY 10231",
+    //         "status": false, 
+    //         "rating": 1.3,
+    //         "estimate": 720000
+    //     }
+    // ]
 })
 
 $('#logo-after').click(function() {
     window.location = './home.html';
 });
+
+async function fetchSearchResults(location, sortField) {
+    const endpoint = `https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2/search/${location}`;
+
+    // Get the access token from session storage
+    const accessToken = sessionStorage.getItem('accessToken');
+    
+    const requestOptions = {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ sort_field: sortField }),
+    };
+    
+    const response = await fetch(endpoint, requestOptions);
+    const data = await response.json();
+
+    console.log(data)
+
+    // Format the output
+    const search_results = data.map((item) => {
+        return {
+        id: item.zpid,
+        image: item.hiResImageLink,
+        price: item.ListingPrice,
+        unit: 1,
+        area: item.GrLivArea,
+        address: item.address.streetAddress,
+        status: false,
+        rating: 3.0,
+        estimate: 123,
+        };
+    });
+
+    return search_results;
+}
 
 // show houses based on search query
 function show_house_results(search_results, search_text) {
