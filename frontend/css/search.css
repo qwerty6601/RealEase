@@ -31,7 +31,11 @@ body {
 }
 
 #search-container {
-    text-align: center;
+    text-align: left;
+}
+
+#search-houses {
+    margin-left: 1.5%;
 }
 
 #search-title {

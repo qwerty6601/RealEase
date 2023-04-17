@@ -41,9 +41,9 @@ async function fetchSearchResults(location, sortField) {
         return {
         id: item.zpid,
         image: item.hiResImageLink,
-        price: item.ListingPrice,
+        price: Number(item.ListingPrice),
         unit: 1,
-        area: item.GrLivArea,
+        area: Number(item.GrLivArea),
         address: item["address.streetAddress"],
         status: false,
         rating: 3.0,
@@ -66,6 +66,7 @@ function show_house_results(search_results, search_text) {
                 $("#search-houses").append("<div>" + value.title + "</div>")
             }
             else {
+                console.log(value.address)
                 // get favorite status image source
                 var favorite_status_src = ""
                 if (value.status) {
