@@ -51,9 +51,9 @@ apigClientFactory.newClient = function (config) {
         config.defaultAcceptType = 'application/json';
     }
 
-    
+
     // extract endpoint and path from url
-    var invokeUrl = 'https://ipbrf8ltl7.execute-api.us-east-1.amazonaws.com/prod';
+    var invokeUrl = 'https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2';
     var endpoint = /(^https?:\/\/[^\/]+)/g.exec(invokeUrl)[1];
     var pathComponent = invokeUrl.substring(endpoint.length);
 
@@ -80,14 +80,14 @@ apigClientFactory.newClient = function (config) {
     };
 
     var apiGatewayClient = apiGateway.core.apiGatewayClientFactory.newClient(simpleHttpClientConfig, sigV4ClientConfig);
-    
-    
-    
+
+
+
     apigClient.chatbotPost = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
-        
+
         apiGateway.core.utils.assertParametersDefined(params, ['body'], ['body']);
-        
+
         var chatbotPostRequest = {
             verb: 'post'.toUpperCase(),
             path: pathComponent + uritemplate('/chatbot').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
@@ -95,17 +95,17 @@ apigClientFactory.newClient = function (config) {
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
-        
-        
+
+
         return apiGatewayClient.makeRequest(chatbotPostRequest, authType, additionalParams, config.apiKey);
     };
-    
-    
+
+
     apigClient.chatbotOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
-        
+
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
-        
+
         var chatbotOptionsRequest = {
             verb: 'options'.toUpperCase(),
             path: pathComponent + uritemplate('/chatbot').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
@@ -113,11 +113,209 @@ apigClientFactory.newClient = function (config) {
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
-        
-        
+
+
         return apiGatewayClient.makeRequest(chatbotOptionsRequest, authType, additionalParams, config.apiKey);
     };
-    
+
+
+    apigClient.getPredictionsListOfCriteriaGet = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, ['listOfCriteria'], ['body']);
+
+        var getPredictionsListOfCriteriaGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate('/getPredictions/{listOfCriteria}').expand(apiGateway.core.utils.parseParametersToObject(params, ['listOfCriteria'])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(getPredictionsListOfCriteriaGetRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.getPredictionsListOfCriteriaOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+
+        var getPredictionsListOfCriteriaOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/getPredictions/{listOfCriteria}').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(getPredictionsListOfCriteriaOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.houseHouseIdGet = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, ['houseId', 'city', 'limit', 'page'], ['body']);
+
+        var houseHouseIdGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate('/house/{houseId}').expand(apiGateway.core.utils.parseParametersToObject(params, ['houseId', ])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, ['city', 'limit', 'page']),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(houseHouseIdGetRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.houseHouseIdOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+
+        var houseHouseIdOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/house/{houseId}').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(houseHouseIdOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.searchLocationGet = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, ['location'], ['body']);
+
+        var searchLocationGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate('/search/{location}').expand(apiGateway.core.utils.parseParametersToObject(params, ['location'])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(searchLocationGetRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.searchLocationOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+
+        var searchLocationOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/search/{location}').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(searchLocationOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.userIdFavHouseStatusHouseIdPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, ['userId'], ['body']);
+
+        var userIdFavHouseStatusHouseIdPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/{userId}/favHouseStatus/houseId').expand(apiGateway.core.utils.parseParametersToObject(params, ['userId'])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(userIdFavHouseStatusHouseIdPostRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.userIdFavHouseStatusHouseIdDelete = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, ['userId'], ['body']);
+
+        var userIdFavHouseStatusHouseIdDeleteRequest = {
+            verb: 'delete'.toUpperCase(),
+            path: pathComponent + uritemplate('/{userId}/favHouseStatus/houseId').expand(apiGateway.core.utils.parseParametersToObject(params, ['userId'])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(userIdFavHouseStatusHouseIdDeleteRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.userIdFavHouseStatusHouseIdOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+
+        var userIdFavHouseStatusHouseIdOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/{userId}/favHouseStatus/houseId').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(userIdFavHouseStatusHouseIdOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.userIdFavoriteGet = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, ['userId'], ['body']);
+
+        var userIdFavoriteGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate('/{userId}/favorite').expand(apiGateway.core.utils.parseParametersToObject(params, ['userId'])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(userIdFavoriteGetRequest, authType, additionalParams, config.apiKey);
+    };
+
+
+    apigClient.userIdFavoriteOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+
+        var userIdFavoriteOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/{userId}/favorite').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+
+
+        return apiGatewayClient.makeRequest(userIdFavoriteOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+
 
     return apigClient;
 };
