@@ -50,7 +50,7 @@ async function fetchSearchResults(location, sortField) {
         zip: item["address.zipcode"],
         status: false,
         rating: 3.0,
-        estimate: item["PredictedPrice"].toFixed(0),
+        estimate: Number(item["PredictedPrice"].toFixed(0)),
         };
     });
 
@@ -69,7 +69,6 @@ function show_house_results(search_results, search_text) {
                 $("#search-houses").append("<div>" + value.title + "</div>")
             }
             else {
-                console.log(value.address)
                 // get favorite status image source
                 var favorite_status_src = ""
                 if (value.status) {
@@ -77,7 +76,6 @@ function show_house_results(search_results, search_text) {
                 } else {
                     favorite_status_src = "./img/dislike.png"
                 }
-
                 $("#search-houses").append('<div class="col-4 house"> \
                                             <a href="https://www.zillow.com/homedetails/' + value.id + '_zpid/" target="_blank"> \
                                             <img class="house-imgs" src="' + value.image + '"></a> \
