@@ -1,7 +1,7 @@
 $(document).ready(function() {
     let search_text = location.hash.substring(1); 
 
-    fetchSearchResults(search_text, "ListingPrice")
+    fetchSearchResults(search_text, "PredictedPrice")
         .then((search_results) => {
             console.log('Formatted Search Results:', search_results);
             show_house_results(search_results, search_text)
@@ -50,7 +50,7 @@ async function fetchSearchResults(location, sortField) {
         zip: item["address.zipcode"],
         status: false,
         rating: 3.0,
-        estimate: 123,
+        estimate: item["PredictedPrice"].toFixed(0),
         };
     });
 

@@ -4,6 +4,7 @@ import json
 import requests
 from requests_aws4auth import AWS4Auth
 import urllib.parse
+from decimal import Decimal
 
 region = 'us-east-1' # For example, us-west-1
 service = 'es'
@@ -87,6 +88,10 @@ def lambda_handler(event, context):
     for record_id in matching_ids:
         item = table.get_item(Key={'zpid': str(record_id)})
         if 'Item' in item:
+            # Convert Decimal values to float before appending to items list
+            for key, value in item['Item'].items():
+                if isinstance(value, Decimal):
+                    item['Item'][key] = float(value)
             items.append(item['Item'])
 
     response = {
