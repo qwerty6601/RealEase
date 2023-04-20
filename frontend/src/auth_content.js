@@ -6,9 +6,9 @@ export function checkAuthContent() {
         userAuthState()
             .then(data => {
                 console.log('user is authenticated: ', data);
-
+                const email = data.attributes.email;
                 const accessToken = data.signInUserSession.accessToken.jwtToken;
-                // console.log(accessToken);
+                sessionStorage.setItem('userEmail', email);
                 sessionStorage.setItem('accessToken', accessToken);
             })
             // if not authenticated, pages will redirect to home page (before login)
@@ -20,9 +20,9 @@ export function checkAuthContent() {
         userAuthState()
             .then(data => {
                 console.log('user is authenticated: ', data);
-
+                const email = data.attributes.email;
                 const accessToken = data.signInUserSession.accessToken.jwtToken;
-                // console.log(accessToken);
+                sessionStorage.setItem('userEmail', email);
                 sessionStorage.setItem('accessToken', accessToken);
 
                 // if user already authenticated, redirect to home page (after login)

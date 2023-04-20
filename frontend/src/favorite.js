@@ -4,47 +4,63 @@ var compare_houses = []
 $(document).ready(function() {
     $('#compare').hide();
 
-    favorite_houses = [
-        {
-            "id": 1,
-            "image": "./img/house-1.png",
-            "price": 275000,
-            "unit": 1,
-            "area": 1164,
-            "address": "347 East 4th Street, NYC, NY 10009",
-            "status": true, 
-            "rating": 8.4,
-            "estimate": 250500
-        },
-        {
-            "id": 2,
-            "image": "./img/house-2.png",
-            "price": 459900,
-            "unit": 3,
-            "area": 2101,
-            "address": "627 East 6th Street, NYC, NY 10009",
-            "status": true, 
-            "rating": 3.1,
-            "estimate": 460000
-        },
-        {
-            "id": 3,
-            "image": "./img/house-3.png",
-            "price": 489900,
-            "unit": 4,
-            "area": 2005,
-            "address": "512 East 11th Street, 5D, NYC, NY 10075",
-            "status": true, 
-            "rating": 5.3,
-            "estimate": 520000
-        }
-    ]
-    show_favorite_houses(favorite_houses)
+    let email = sessionStorage.getItem('userEmail')
+
+    fetchFavoriteHouses(email)
+        .then((favorite_houses) => {
+            console.log('Formatted Favorite Results:', favorite_houses);
+            show_favorite_houses(favorite_houses)
+        })
+        .catch((error) => {
+            console.error('Error fetching search results:', error);
+        });
 })
 
 $('#logo-after').click(function() {
     window.location = './home.html';
 });
+
+// find user's favorite houses
+async function fetchFavoriteHouses(email) {
+    const apiUrl = "https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2/" + email + "/favorite";
+    
+    const requestOptions = {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json'
+        }
+    };
+    
+    const response = await fetch(apiUrl, requestOptions);
+
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+
+    console.log(data)
+
+    // Format the output
+    const favorite_houses = data.map((item) => {
+        return {
+        id: item.zpid,
+        image: item.hiResImageLink,
+        price: Number(item.ListingPrice),
+        unit: 1,
+        area: Number(item.GrLivArea),
+        address: item["address.streetAddress"],
+        city: item["city"],
+        state: item["state"],
+        zip: item["address.zipcode"],
+        status: true,
+        rating: 3.0,
+        estimate: Number(item["PredictedPrice"].toFixed(0)),
+        };
+    });
+
+    return favorite_houses;
+}
 
 // show houses based on search query
 function show_favorite_houses(favorite_houses) {
@@ -58,11 +74,11 @@ function show_favorite_houses(favorite_houses) {
         }
 
         $("#fav-houses").append('<div class="col-4 house"> \
-                                    <a href="/house.html#' + value.id + '"> \
+                                    <a href="https://www.zillow.com/homedetails/' + value.id + '_zpid/" target="_blank"> \
                                     <img class="house-imgs" src="' + value.image + '"></a> \
                                     <span class="house-price">$' + value.price.toLocaleString("en-US") + '</span> \
                                     <span class="house-prop">' + value.unit + ' unit(s) | ' + value.area.toLocaleString("en-US") + ' sq ft</span> \
-                                    <span class="house-address">' + value.address + '</span> \
+                                    <span class="house-address">' + value.address + ", " + value.city + ", " + value.state + " " + value.zip + '</span> \
                                     <input class="house-fav" type="image" id="fav-' + value.id + '"src="' + favorite_status_src + '"/> \
                                     <input class="house-add" type="image" id="add-' + value.id + '"src="./img/add.png"/> \
                                     <div class="house-rating" id="rating-' + value.id + '">' + value.rating + '</div> \
