@@ -1,7 +1,13 @@
 $(document).ready(function() {
-    let search_text = location.hash.substring(1); 
+    let search_text = location.hash.substring(1);
+    
+    let searchParams = new URLSearchParams(window.location.search);
 
-    fetchSearchResults(search_text, "PredictedPrice")
+    // Retrieve the values of the 'sort_field' and 'direction' parameters
+    let sortField = searchParams.get('sort_field') || "PredictedPrice"; // Use a default value if 'sort_field' is not present
+    let direction = searchParams.get('direction') || "desc"; // Use a default value if 'direction' is not present
+
+    fetchSearchResults(search_text, sortField, direction)
         .then((search_results) => {
             console.log('Formatted Search Results:', search_results);
             show_house_results(search_results, search_text)
@@ -15,41 +21,68 @@ $('#logo-after').click(function() {
     window.location = './home.html';
 });
 
-async function fetchSearchResults(location, sortField) {
+async function getFavorites(userId) {
+    const url = `https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2/${userId}/favorite`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        console.error(`HTTP error in getFavorites: ${response.status}`);
+        return [];
+    }
+
+    const data = await response.json();
+    console.log('API response data:', data); // Add this line to print the response data
+
+    try {
+        const zpids = data.map(item => item.zpid);
+        return zpids
+    } catch (error) {
+        console.error("Error getting favorites:", error);
+        return [];
+    }
+}
+
+
+async function fetchSearchResults(location, sortField, direction) {
     const user_input = location;
-    const apiUrl = `https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2/search/${location}?user_input=${encodeURIComponent(user_input)}&sort_field=${encodeURIComponent(sortField)}`;
-    
+    const apiUrl = `https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2/search/${location}?user_input=${encodeURIComponent(user_input)}&sort_field=${encodeURIComponent(sortField)}&sort_direction=${encodeURIComponent(direction)}`;
+
     const requestOptions = {
         method: 'GET',
-        headers: { 
-            'Content-Type': 'application/json'
-        }
+        headers: {
+        'Content-Type': 'application/json',
+        },
     };
-    
+
     const response = await fetch(apiUrl, requestOptions);
 
     if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
     }
-    
+
     const data = await response.json();
 
-    console.log(data)
+    console.log(data);
 
+    const favorites = await getFavorites(sessionStorage.getItem('userEmail'));
+    console.log(favorites)
     // Format the output
     const search_results = data.map((item) => {
+        const zpid = item.zpid;
+        const status = favorites.includes(zpid);
+
         return {
-        id: item.zpid,
+        id: zpid,
         image: item.hiResImageLink,
         price: Number(item.ListingPrice),
         area: Number(item.GrLivArea),
-        address: item["address.streetAddress"],
-        city: item["city"],
-        state: item["state"],
-        zip: item["address.zipcode"],
-        status: false,
-        rating: 3.0,
-        estimate: Number(item["PredictedPrice"].toFixed(0)),
+        address: item['address.streetAddress'],
+        city: item['city'],
+        state: item['state'],
+        zip: item['address.zipcode'],
+        status: status,
+        rating: item.score,
+        estimate: Number(item['PredictedPrice'].toFixed(0)),
         };
     });
 
@@ -89,12 +122,34 @@ function show_house_results(search_results, search_text) {
 
                 // change favorite status
                 $('#fav-' + value.id).click(function() {
-                    // TODO: send http request to backend to update user's like status
-                    if ($('#fav-' + value.id).attr("src") == "./img/like.png") {
-                        $('#fav-' + value.id).attr("src", "./img/dislike.png");
-                    } else {
-                        $('#fav-' + value.id).attr("src", "./img/like.png");
-                    }
+                    var user_id = sessionStorage.getItem('userEmail');
+                    var zpid = value.id;
+
+                    // Set the event object with the zpid and user_id
+                    const event = {
+                        zpid: zpid,
+                        user_id: user_id
+                    };
+                    // Send HTTP request to backend to update user's like status
+                    $.ajax({
+                        type: 'POST',
+                        url: `https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2/${user_id}/favHouseStatus/houseId`,
+                        data: JSON.stringify(event),
+                        dataType: 'json',
+                        success: function(response) {
+                            // Update the favorite button image based on the response
+                            if (response.message == "favorited"){
+                                $('#fav-' + zpid).attr("src", "./img/like.png");
+                            } else {
+                                $('#fav-' + zpid).attr("src", "./img/dislike.png");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("Error updating favorites:", error);
+                        },
+                        contentType: "application/json",
+                        dataType: 'json'
+                    });
                 });
             }  
         });

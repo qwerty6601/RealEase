@@ -3,7 +3,7 @@ $("#search").submit(function(event) {
     search_text = $("input").val()
 
     if ($.trim(search_text)) {
-        window.location = "/search_results.html#" + search_text
+        window.location = "/search_results.html" + "?sort_field=score&direction=desc#" + search_text
     }
 });
 

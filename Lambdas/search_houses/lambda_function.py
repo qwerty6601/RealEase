@@ -5,6 +5,10 @@ import requests
 from requests_aws4auth import AWS4Auth
 import urllib.parse
 from decimal import Decimal
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 region = 'us-east-1' # For example, us-west-1
 service = 'es'
@@ -21,7 +25,7 @@ table = dynamodb.Table('current_listings')
 headers = { "Content-Type": "application/json" }
 
 # Function for searching by user input
-def search_opensearch_index(user_input, sort_field):
+def search_opensearch_index(user_input, sort_field, sort_direction):
     # Check if input is a zip code
     if re.match(r'^\d{5}(-\d{4})?$', user_input):
         query = {
@@ -53,14 +57,23 @@ def search_opensearch_index(user_input, sort_field):
     query["sort"] = [
         {
             sort_field: {
-                "order": "desc"
+                "order": sort_direction
             }
         }
     ]
     query["_source"] = ["zpid"]
     query["size"] = 20
 
+    logger.info(f"Request URL: {url}")
+    logger.info(f"Request headers: {headers}")
+    logger.info(f"Request payload: {json.dumps(query)}")
+
     response = requests.post(url, auth=awsauth, headers=headers, data=json.dumps(query))
+
+    # Add logging for the response
+    logger.info(f"Response status code: {response.status_code}")
+    logger.info(f"Response content: {response.text}")
+
     response.raise_for_status()
     response_json = response.json()
 
@@ -73,6 +86,7 @@ def lambda_handler(event, context):
 
     user_input = query_params.get('user_input')
     sort_field = query_params.get('sort_field')
+    sort_direction = query_params.get('sort_direction')
 
     if user_input:
         user_input = urllib.parse.unquote(user_input)
@@ -80,7 +94,7 @@ def lambda_handler(event, context):
     if sort_field:
         sort_field = urllib.parse.unquote(sort_field)
 
-    matching_ids = search_opensearch_index(user_input, sort_field)
+    matching_ids = search_opensearch_index(user_input, sort_field, sort_direction)
     print("Matching IDs:", matching_ids)
 
     # Retrieve matching DynamoDB items

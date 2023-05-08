@@ -9,8 +9,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 
+    <style>
+      .btn-secondary {
+        background-color: #f8f9fa;
+        color: #333;
+        border: 1px solid #ccc;
+      }
+      
+      .btn-secondary:hover {
+        background-color: #e7e7e7;
+        color: #333;
+      }
+      
+      .dropdown-menu {
+        border: 1px solid #ccc;
+      }
+    </style>
   </head>
 
   <body>
@@ -19,6 +36,14 @@
       <a class="menu-item" href="./favorite.html">Favorites</a>
       <button id="logout-btn">LOGOUT</button>
     </div>
+
+    <style>
+      .sort-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 20px;
+      }
+    </style>
     
     <div id="search-menu" class="container-fluid">
       <div class="row">
@@ -26,11 +51,108 @@
           <h2 id="search-title"></h2>
         </div>
         <div id="sort" class="col-md-3">
-          <img src="./img/sort.png">
-          <button id="sort-btn">Sort: Estimated Price</button>
+          <div class="sort-container">
+            <div class="dropdown" style="display: inline-block;">
+              <button class="btn btn-default dropdown-toggle custom-dropdown-toggle" type="button" id="sort-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Sort: Predicted Price
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="sort-btn">
+                <li><a href="#" data-value="score">Sort: RealEase Score</a></li>
+                <li><a href="#" data-value="PredictedPrice">Sort: Predicted Price</a></li>
+                <li><a href="#" data-value="ListingPrice">Sort: Listing Price</a></li>
+                <li><a href="#" data-value="GrLivArea">Sort: Living Area (sq ft)</a></li>
+                <li><a href="#" data-value="BedroomAbvGr">Sort: Bedrooms</a></li>
+              </ul>
+            </div>
+            <button id="sort-direction" class="btn btn-default" data-direction="desc">
+              <img src="./img/sort.png" style="height: 16px;">
+            </button>
+          </div>
         </div>
       </div>
     </div>
+    
+    
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentSortValue = urlParams.get('sort_field');
+        let currentSortDirection = urlParams.get('sort_direction');
+        console.log(currentSortValue)
+
+        // Set the initial button text and direction data
+        setSortButtonText(currentSortValue, currentSortDirection);
+
+        // Update sorting value
+        $(".dropdown-menu li a").on("click", function(event) {
+          event.preventDefault(); // Prevent the default click behavior
+
+          currentSortValue = $(this).data("value");
+          let sortText = $(this).text();
+
+          // Update button text
+          $("#sort-btn").text(sortText);
+
+          // Get the current direction from the 'sort-direction' button
+          let currentDirection = $("#sort-direction").data("direction");
+          sortResults(currentSortValue, currentDirection);
+        });
+
+        // Toggle sorting direction
+        $("#sort-direction").on("click", function() {
+          let currentDirection = $(this).data("direction");
+          let newDirection = currentDirection === "asc" ? "desc" : "asc";
+          $(this).data("direction", newDirection);
+
+          sortResults(currentSortValue, newDirection);
+        });
+
+        // Sort results function
+        function sortResults(sortValue, direction) {
+          // Extract the base URL, location, and search parameters from the current URL
+          const currentUrl = new URL(window.location.href);
+          const baseUrl = currentUrl.origin;
+          const locationPath = currentUrl.pathname;
+          const hashFragment = window.location.hash;
+
+          // Construct the new URL, including the hash fragment
+          const newUrl = new URL(locationPath + hashFragment, baseUrl);
+
+          // Update the search parameters of the new URL object
+          newUrl.searchParams.set('sort_field', sortValue);
+          newUrl.searchParams.set('direction', direction);
+
+          // Refresh the page with the new URL
+          window.location.href = newUrl.toString();
+        }
+      });
+
+      // Set the button text based on the sort field
+      function setSortButtonText(sortField, sortDirection) {
+        const fieldTextMap = {
+          PredictedPrice: "Sort: Predicted Price",
+          ListingPrice: "Sort: Listing Price",
+          score: "Sort: RealEase Score",
+          GrLivArea: "Sort: Living Area (sq ft)",
+          BedroomAbvGr: "Sort: Bedrooms",
+        };
+
+        const directionTextMap = {
+          asc: "(Ascending)",
+          desc: "(Descending)",
+        };
+
+        const sortValueText = fieldTextMap[sortField] || "Sort: Predicted Price";
+        const sortDirectionText = directionTextMap[sortDirection] || "(Descending)";
+        $("#sort-btn").text(sortValueText + " " + sortDirectionText);
+      }
+    </script>
 
     <!-- container for all search results -->
     <div id="search-container" class="container-fluid">
