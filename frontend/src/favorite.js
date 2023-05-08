@@ -44,17 +44,17 @@ async function fetchFavoriteHouses(email) {
     // Format the output
     const favorite_houses = data.map((item) => {
         return {
-        id: item.zpid,
-        image: item.hiResImageLink,
-        price: Number(item.ListingPrice),
-        area: Number(item.GrLivArea),
-        address: item["address.streetAddress"],
-        city: item["city"],
-        state: item["state"],
-        zip: item["address.zipcode"],
-        status: true,
-        rating: 3.0,
-        estimate: Number(item["PredictedPrice"].toFixed(0)),
+            id: item.zpid,
+            image: item.hiResImageLink,
+            price: Number(item.ListingPrice),
+            area: Number(item.GrLivArea),
+            address: item['address.streetAddress'],
+            city: item['city'],
+            state: item['state'],
+            zip: item['address.zipcode'],
+            status: true,
+            rating: item.score,
+            estimate: Number(item['PredictedPrice'].toFixed(0)),
         };
     });
 
@@ -87,12 +87,34 @@ function show_favorite_houses(favorite_houses) {
 
         // change favorite status
         $('#fav-' + value.id).click(function() {
-            // TODO: send http request to backend to update user's like status
-            if ($('#fav-' + value.id).attr("src") == "./img/like.png") {
-                $('#fav-' + value.id).attr("src", "./img/dislike.png");
-            } else {
-                $('#fav-' + value.id).attr("src", "./img/like.png");
-            }
+            var user_id = sessionStorage.getItem('userEmail');
+            var zpid = value.id;
+
+            // Set the event object with the zpid and user_id
+            const event = {
+                zpid: zpid,
+                user_id: user_id
+            };
+            // Send HTTP request to backend to update user's like status
+            $.ajax({
+                type: 'POST',
+                url: `https://7td214zyq5.execute-api.us-east-1.amazonaws.com/cp2/${user_id}/favHouseStatus/houseId`,
+                data: JSON.stringify(event),
+                dataType: 'json',
+                success: function(response) {
+                    // Update the favorite button image based on the response
+                    if (response.message == "favorited"){
+                        $('#fav-' + zpid).attr("src", "./img/like.png");
+                    } else {
+                        $('#fav-' + zpid).attr("src", "./img/dislike.png");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error updating favorites:", error);
+                },
+                contentType: "application/json",
+                dataType: 'json'
+            });
         });
 
         // change add status
