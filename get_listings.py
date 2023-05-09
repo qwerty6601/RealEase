@@ -10,7 +10,7 @@ querystring = {
 }
 
 headers = {
-	"X-RapidAPI-Key": "21053b51bamsh6be9c834d278a43p1d78d1jsn91b67573ad0b",
+	"X-RapidAPI-Key": # Your RapidAPI Key,
 	"X-RapidAPI-Host": "zillow-com1.p.rapidapi.com"
 }
 
